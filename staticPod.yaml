@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: static-web
+spec:
+  containers:
+    - name: webTest
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+        - protocol: TCP
