@@ -4,8 +4,9 @@ metadata:
   name: static-web
 spec:
   containers:
-    - name: webTest
+    - name: web
       image: nginx:latest
       ports:
-        - containerPort: 80
-        - protocol: TCP
+        - name: web
+          containerPort: 80
+          protocol: TCP
