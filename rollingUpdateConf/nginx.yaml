@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginxdeployment
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1 # Number of pods that can be unavailable during the update
+      maxSurge: 1 # Number of pods that can be created above the desired number of pods
+  template:
+    metadata:
+      labels:
+        app: nginxdeployment
+    spec:
+      containers:
+        - name: nginxdeployment
+          # image: nginx:1.21 # uncomment to show rolling update
+          image: nginx:latest
+          ports:
+            - containerPort: 80
