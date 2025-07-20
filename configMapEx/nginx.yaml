@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginxdeployment
+  template:
+    metadata:
+      labels:
+        app: nginxdeployment
+    spec:
+      containers:
+        - name: nginxdeployment
+          image: nginx:latest
+          env:
+            - name: nginxconfig
+              valueFrom:
+                configMapKeyRef:
+                  name: nginx-conf-map
+                  key: username
+          ports:
+            - containerPort: 80
